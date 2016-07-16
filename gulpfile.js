@@ -8,6 +8,8 @@ var uglify = require('gulp-uglify');
 var minifyCSS = require('gulp-minify-css');
 var clean = require('gulp-clean');
 var runSequence = require('run-sequence');
+var karma = require('karma').server;
+var protractor = require("gulp-protractor").protractor;
 
 // tasks
 gulp.task('lint', function() {
@@ -29,8 +31,6 @@ gulp.task('minify-css', function() {
 gulp.task('minify-js', function() {
   gulp.src(['./app/**/*.js', '!./app/bower_components/**'])
     .pipe(uglify({
-      // inSourceMap:
-      // outSourceMap: "app.js.map"
     }))
     .pipe(gulp.dest('./dist/'))
 });
@@ -54,9 +54,28 @@ gulp.task('connectDist', function () {
     port: 9999
   });
 });
+gulp.task('unit', function(done) {
+  karma.start({
+    configFile: __dirname + '/tests/karma.conf.js'
+  }, done);
+});
+
+gulp.task('unitsr', function(done) {
+  karma.start({
+    configFile: __dirname + '/tests/karma.conf.js'
+  }, done);
+});
+gulp.task('e2e', function(done) {
+  var args = ['--baseUrl', 'http://127.0.0.1:8888'];
+  gulp.src(["./tests/e2e/*.js"])
+    .pipe(protractor({
+      configFile: "tests/protractor.conf.js",
+      args: args
+    }))
+    .on('error', function(e) { throw e; });
+});
 
 
-// default task
 gulp.task('default',
   ['lint', 'connect']
 );
@@ -64,5 +83,10 @@ gulp.task('build', function() {
   runSequence(
     ['clean'],
     ['lint', 'minify-css', 'minify-js', 'copy-html-files', 'copy-bower-components', 'connectDist']
+  );
+});
+gulp.task('test', function() {
+  runSequence(
+    ['unitsr'],['e2e']
   );
 });
