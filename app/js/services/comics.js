@@ -6,8 +6,10 @@
 					callBack(response.data);
 				});
 			},
-			getOne:function(id){
-				$http.get('/comic?id='+1);
+			getOne:function(id, callBack){
+				$http.get('/comic?id='+id).then(function(response){
+					callBack(response.data);
+				});
 			},
 			create:function(comic, callBack){
 				if (comic.title == undefined)

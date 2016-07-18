@@ -1,11 +1,15 @@
 (function(){
 	'use strict';
 	angular.module('comicStore')
-	.run(['$httpBackend', 'users', function($httpBackend, $users) {
+	.run(['$httpBackend', 'users', 'comicstock', function($httpBackend, $users, $comicstock) {
 
 		$users.add('admin', 'admin', 'admin', 'admin');
 
-		$httpBackend.whenGET( '' ).passThrough(); 
+		$comicstock.add(1, 'superman', 'the man of steel');
+		$comicstock.add(2, 'batman', 'the dark knoght');
+		$comicstock.add(3, 'green lantern', 'the guardian fo the galaxy');
+		$comicstock.add(4, 'hulk', 'the great beast');
+
 		$httpBackend.whenPOST('/login').respond(function(method, url, data, headers){
 			var data = angular.fromJson(data);
 			var user = $users.get(data.username, data.password);
@@ -18,9 +22,19 @@
 		$httpBackend.whenPOST('/register').respond(function(method, url, data, headers){
 			var data = angular.fromJson(data);
 			$users.add(data.username, data.password, data.name, data.lastname);
-			console.log($users.getAll());
 			return [200, {}, {}]
 		});
+
+		$httpBackend.whenGET('/comics').respond(function(method, url, data, headers){
+			return [200, $comicstock.getAll(), {}]
+		});
+		$httpBackend.whenGET(new RegExp('\\/comic\\?id=[0-9]+')).respond(function(method, url, data, headers){
+			var queryMatch = /^[^#]*\?([^#]*)/.exec(url);
+  			var query = queryMatch ? queryMatch[1] : "";
+			var id = query.split('=')[1];
+			return [200, $comicstock.get(id), {}]
+		});
+		$httpBackend.whenGET( '' ).passThrough(); 
 	}])
 	.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider){
 		$locationProvider.hashPrefix('!');
@@ -35,8 +49,12 @@
 				controller: "registryController"
 			}).when(
 			'/comics', {
-				templateUrl: "./templates/comics.html",
+				templateUrl: "./templates/comicstock.html",
 				controller: "comicsController"
+			}).when(
+			'/comicdetail/:id', {
+				templateUrl: "./templates/comicdetail.html",
+				controller: "comicDetailController"
 			})
 	}]);
 }());

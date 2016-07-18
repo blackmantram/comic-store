@@ -56,14 +56,14 @@ describe('comics service', function () {
   		expect(response).toBe('missing_detail');
   	});
 
-  	it('can get one comic', function(){
-  		comics.getOne();
-  	});
-
   	it('gets one comic', function(){
+      var comic;
   		httpBackend.when('GET', '/comic?id=1').respond({});
-  		comics.getOne(1);
+  		comics.getOne(1, function(_comic){
+        comic = _comic;
+      });
   		httpBackend.expectGET ('/comic?id=1');
   		httpBackend.flush();
+      expect(comic).toEqual({});
   	});
 });

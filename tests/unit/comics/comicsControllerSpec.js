@@ -25,13 +25,12 @@ describe('comics controller', function () {
 
   	it('gets all', function(){
   		getAllComics();
-  		expect(scope.comicsData).toEqual([]);
+  		expect(scope.comicstock).toEqual([]);
   	});
 
   	function getAllComics()
   	{
   		controller('comicsController', {$scope:scope, comics:comicsServiceMock});
-  		scope.getAllComics();
   	}
   		
 });
