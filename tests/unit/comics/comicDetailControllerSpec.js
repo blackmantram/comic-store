@@ -15,6 +15,7 @@ describe('comic detail controller', function () {
         comicsServiceMock = _comics_;
 	    });
   	});
+    
     beforeEach(function(){
       comicsServiceMock.getOne = function(id, callBack){
         callBack({title:'title', detail:'detail'});

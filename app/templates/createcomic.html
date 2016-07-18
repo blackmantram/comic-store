@@ -1,0 +1,16 @@
+<navbar></navbar>
+<div class="login">
+  <div class="login-header">
+    <h1>Create comic</h1>
+  </div>
+  <div class="login-form">
+    <h3>Title:</h3>
+    <input type="text" placeholder="title" ng-model="title"/>
+    <h3>Detail:</h3>
+    <textarea placeholder="details" ng-model="details"></textarea>
+    <br>
+    <input type="button" value="Create" class="login-button" ng-click="create()"/>
+    <br>
+    <h6 class="no-access">{{message}}</h6>
+  </div>
+</div>

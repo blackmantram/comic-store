@@ -28,12 +28,21 @@
 		$httpBackend.whenGET('/comics').respond(function(method, url, data, headers){
 			return [200, $comicstock.getAll(), {}]
 		});
+
 		$httpBackend.whenGET(new RegExp('\\/comic\\?id=[0-9]+')).respond(function(method, url, data, headers){
 			var queryMatch = /^[^#]*\?([^#]*)/.exec(url);
   			var query = queryMatch ? queryMatch[1] : "";
 			var id = query.split('=')[1];
 			return [200, $comicstock.get(id), {}]
 		});
+
+		$httpBackend.whenPOST('/comics').respond(function(method, url, data, headers){
+			var id = $comicstock.getAll().length+1;
+			var data = angular.fromJson(data);
+			$comicstock.add(id, data.title, data.details);
+			return [200, $comicstock.getAll(), {}]
+		});
+
 		$httpBackend.whenGET( '' ).passThrough(); 
 	}])
 	.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider){
@@ -59,6 +68,10 @@
 			'/logout', {
 				template: "",
 				controller: "logoutController"
+			}).when(
+			'/create', {
+				templateUrl: "./templates/createcomic.html",
+				controller: "comicCreateController"
 			})
 	}]);
 }());

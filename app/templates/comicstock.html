@@ -1,8 +1,10 @@
 <navbar></navbar>
 <div class="login">
   <div class="login-form">
+  	<input type="text" ng-model="filterText">
+  	<input type="button" value="New" class="login-button" ng-click="create()"/>
   	<ul>
-  		<li ng-repeat="comic in comicstock">
+  		<li ng-repeat="comic in comicstock | filter:{title:filterText}">
   			<a ng-href="#!/comicdetail/{{comic.id}}">{{comic.title}}</a>
   		</li>
   	</ul>
