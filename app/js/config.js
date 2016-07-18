@@ -55,6 +55,10 @@
 			'/comicdetail/:id', {
 				templateUrl: "./templates/comicdetail.html",
 				controller: "comicDetailController"
+			}).when(
+			'/logout', {
+				template: "",
+				controller: "logoutController"
 			})
 	}]);
 }());
