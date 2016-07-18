@@ -1,7 +1,11 @@
 (function () {
 	'use strict';
 	angular.module('comicStore')
-	.controller('loginController', ['$scope', 'login', '$cookies', function($scope, login, $cookies) {
+	.controller('loginController', ['$scope', 'login', '$cookies', '$location', function($scope, login, $cookies, $location) {
+
+		if ($cookies.get('username') !== undefined)
+			$location.path('/comics');
+
 		$scope.message = '';
 		$scope.login = function () {
 			$scope.message = '';
@@ -16,7 +20,13 @@
 		{
 			login(data, function(){
 				if ($cookies.get('username') === undefined)
+				{
 					$scope.message = 'login_failed';
+				}
+				else
+				{
+					$location.path('/comics');
+				}
 			});
 		}
     }]);

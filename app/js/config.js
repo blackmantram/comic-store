@@ -33,6 +33,10 @@
 			'/registry', {
 				templateUrl: "./templates/registry.html",
 				controller: "registryController"
+			}).when(
+			'/comics', {
+				templateUrl: "./templates/comics.html",
+				controller: "comicsController"
 			})
 	}]);
 }());
