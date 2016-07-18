@@ -5,7 +5,7 @@ module.exports = function(config) {
     basePath: '.',
 
     // frameworks to use
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['jasmine', 'mocha', 'chai'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -13,6 +13,9 @@ module.exports = function(config) {
       '../app/bower_components/jquery/dist/jquery.js',
       '../app/bower_components/angular-mocks/angular-mocks.js',
       '../app/bower_components/angular-route/angular-route.js',
+      '../app/bower_components/angular-cookies/angular-cookies.js',
+      '../app/js/main.js',
+      '../app/js/**/*.js',
       './unit/*.js'
     ],
 

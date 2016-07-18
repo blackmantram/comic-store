@@ -18,4 +18,7 @@
         });
     }
   ]);
+
+  angular.module('comicStore', ['ngCookies']);
+
 }());
