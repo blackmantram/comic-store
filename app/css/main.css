@@ -1,3 +1,5 @@
+/* -- content --*/
+
 body {
   background:url('http://wallpaperscraft.com/image/london_ride_river_house_dock_9656_3840x2400.jpg?orig=3');
   margin:0px;
@@ -6,38 +8,53 @@ body {
 h1, h2, h3, h4, h5, h6, a {
   margin:0; padding:0;
 }
-.login {
+.content {
+  margin:0 auto;
+  max-width:800px;
+}
+.content a{
+  text-decoration: none;
+}
+.content h4{
+  color:#fff;
+  text-shadow: 0px 5px 15px #000;
+}
+.content-form {
   margin:0 auto;
   max-width:500px;
 }
-.login-header {
+.content-header {
   color:#fff;
   text-align:center;
   font-size:300%;
 }
-.login-header h1 {
+.content-header h1 {
    text-shadow: 0px 5px 15px #000;
 }
-.login-form {
+.content-body {
   border:2px solid #999;
   background:#2c3e50;
   border-radius:10px;
   box-shadow:0px 0px 10px #000;
 }
-.login-form h3 {
+.content-body p {
+  color:#fff;
+}
+.content-body h3 {
   text-align:left;
   margin-left:40px;
   color:#fff;
 }
-.login-form {
+.content-body {
   box-sizing:border-box;
   padding-top:15px;
   margin:50px auto;
   text-align:center;
   overflow: hidden;
 }
-.login input[type="text"],
-.login input[type="password"] {
+.content-body input[type="text"],
+.content-body textarea,
+.content-body input[type="password"] {
   width: 100%;
   max-width:400px;
   height:30px;
@@ -48,7 +65,7 @@ h1, h2, h3, h4, h5, h6, a {
   outline:none;
   padding-left:10px;
 }
-.login-form input[type="button"] {
+.content-body input[type="button"] {
   height:30px;
   width:100px;
   background:#fff;
@@ -58,6 +75,9 @@ h1, h2, h3, h4, h5, h6, a {
   text-transform:uppercase;
   font-family: 'Ubuntu', sans-serif;
   cursor:pointer;
+}
+.content-body textarea {
+  height: 90px !important;
 }
 .sign-up{
   color:#f2f2f2;
@@ -71,11 +91,24 @@ h1, h2, h3, h4, h5, h6, a {
   text-decoration:underline;
   cursor:pointer;
 }
-.try-again {
-  color:#f2f2f2;
-  text-decoration:underline;
-  cursor:pointer;
+.content-header h1 {
+   text-shadow: 0px 5px 15px #000;
 }
+
+@media only screen and (min-width : 150px) and (max-width : 530px){
+  .content-body h3 {
+    text-align:center;
+    margin:0;
+  }
+  .sign-up, .no-access {
+    margin:10px 0;
+  }
+  .content-button {
+    margin-bottom:10px;
+  }
+}
+
+/* -- content --*/
 
 /* --nav-- */
 
@@ -131,16 +164,54 @@ ul.topnav li.icon {display: none;}
 
 /* --nav-- */
 
-/*Media Queries*/
-@media only screen and (min-width : 150px) and (max-width : 530px){
-  .login-form h3 {
-    text-align:center;
-    margin:0;
+/* --cards-- */
+
+ul.rig {
+  padding-top: 20px;
+  list-style: none;
+  font-size: 0px;
+  margin-left: -5.0%;
+}
+ul.rig li {
+  display: inline-block;
+  padding: 10px;
+  margin: 0 0 2.5% 2.5%;
+  background: #fff;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  font-size: 1rem;
+  vertical-align: top;
+  box-shadow: 0 0 5px #ddd;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+ul.rig li h3 {
+  color: black;
+  margin: 0 0 5px;
+}
+ul.rig li p {
+  font-size: .9em;
+  line-height: 1.5em;
+  color: #999;
+}
+ul.rig.columns-4 li {
+  width: 22.5%;
+}
+ 
+@media (max-width: 480px) {
+  ul.grid-nav li {
+    display: block;
+    margin: 0 0 5px;
   }
-  .sign-up, .no-access {
-    margin:10px 0;
+  ul.grid-nav li a {
+    display: block;
   }
-  .login-button {
-    margin-bottom:10px;
+  ul.rig {
+    margin-left: 0;
+  }
+  ul.rig li {
+    width: 100% !important; 
+    margin: 0 0 20px;
   }
 }

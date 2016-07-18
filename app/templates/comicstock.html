@@ -1,12 +1,15 @@
 <navbar></navbar>
-<div class="login">
-  <div class="login-form">
-  	<input type="text" ng-model="filterText">
-  	<input type="button" value="New" class="login-button" ng-click="create()"/>
-  	<ul>
-  		<li ng-repeat="comic in comicstock | filter:{title:filterText}">
-  			<a ng-href="#!/comicdetail/{{comic.id}}">{{comic.title}}</a>
-  		</li>
+<div class="content">
+  <div class="content-body">
+  	<input class="filter" type="text" ng-model="filterText">
+  	<input class="new-button" type="button" value="New" class="content-button" ng-click="create()"/>
+  	<ul class="rig columns-4">
+  		<a ng-repeat="comic in comicstock | filter:{title:filterText}" ng-href="#!/comicdetail/{{comic.id}}">
+		    <li>
+          <h3>{{comic.title}}</h3>
+          <p>{{comic.detail}}</p>
+  		  </li>
+  		</a>
   	</ul>
   </div>
 </div>
