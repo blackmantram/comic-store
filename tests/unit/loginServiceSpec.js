@@ -1,4 +1,4 @@
-describe('login', function () {
+describe('login service', function () {
 	var login,
   		cookies,
   		httpBackend,
@@ -18,36 +18,31 @@ describe('login', function () {
 	    });
   	});
 
+  	afterEach(function(){
+  		cookies.remove('username');
+  	});
+
 	it('sets cookie when login succeeds', function () {
-		setupResponse(200, {});
-	  	callLogin();
+		callWithResponse(200);
 	  	expect(cookies.get('username')).toBe(username);
 	});
 
 	it('doesn_t set cookie when login fails', function () {
-		setupResponse(401, '');
-	  	cookies.remove(username);
-		callLogin();
+		callWithResponse(401);
 	  	expect(cookies.get('username')).toBeUndefined();
 	});
 
 	it('requires username and password to login', function () {
-		cookies.remove(username);
-		setupResponse(200, {});
-		callLogin();
+		callWithResponse(200);
 		httpBackend.expectPOST ('/login', {username:username, password:'123'});
 	});
 
-	function callLogin()
-	{
-		login({username:username, password:'123'});
-		httpBackend.flush();
-	}
-
-	function setupResponse(status, data)
+	function callWithResponse(status)
 	{
 		httpBackend.when('POST', '/login')
-			.respond(status, data);
+			.respond(status, '');
+		login({username:username, password:'123'});
+		httpBackend.flush();
 	}
 
 });
