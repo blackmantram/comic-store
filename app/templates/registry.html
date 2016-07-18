@@ -1,16 +1,18 @@
 <div class="login">
   <div class="login-header">
-    <h1>Login</h1>
+    <h1>Register</h1>
   </div>
   <div class="login-form">
+    <h3>Name:</h3>
+    <input type="text" placeholder="name" ng-model="name"/>
+    <h3>Last Name:</h3>
+    <input type="password" placeholder="lastname" ng-model="lastname"/>
     <h3>Username:</h3>
     <input type="text" placeholder="username" ng-model="username"/>
     <h3>Password:</h3>
     <input type="password" placeholder="password" ng-model="password"/>
     <br>
-    <input type="button" value="Login" class="login-button" ng-click="login()"/>
-    <br>
-    <a class="sign-up" >Sign Up!</a>
+    <input type="button" value="Registry" class="login-button" ng-click="register()"/>
     <br>
     <h6 class="no-access">{{message}}</h6>
   </div>

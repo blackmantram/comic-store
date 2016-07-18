@@ -4,8 +4,6 @@ describe('login service', function () {
   		httpBackend,
   		authRequestHandler;
 
-  	var username = 'username';
-
   	beforeEach(function(){
   		module('comicStore');
   	});
@@ -20,11 +18,15 @@ describe('login service', function () {
 
   	afterEach(function(){
   		cookies.remove('username');
+  		cookies.remove('name');
+  		cookies.remove('lastname');
   	});
 
 	it('sets cookie when login succeeds', function () {
 		callWithResponse(200);
-	  	expect(cookies.get('username')).toBe(username);
+		expect(cookies.get('username')).toBe('username');
+	  	expect(cookies.get('name')).toBe('name');
+	  	expect(cookies.get('lastname')).toBe('lastname');
 	});
 
 	it('doesn_t set cookie when login fails', function () {
@@ -33,15 +35,15 @@ describe('login service', function () {
 	});
 
 	it('requires username and password to login', function () {
+		httpBackend.expectPOST ('/login', {username:'username', password:'123'});
 		callWithResponse(200);
-		httpBackend.expectPOST ('/login', {username:username, password:'123'});
 	});
 
 	function callWithResponse(status)
 	{
 		httpBackend.when('POST', '/login')
-			.respond(status, '');
-		login({username:username, password:'123'});
+			.respond(status, {username:'username', name:'name', lastname:'lastname'});
+		login({username:'username', password:'123'});
 		httpBackend.flush();
 	}
 

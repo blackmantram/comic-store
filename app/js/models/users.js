@@ -5,17 +5,16 @@
 			getAll: function() {
 				return this.data;
 			},
-			add:function(username, password){
-				this.data.push({username:username, password:password});
+			add:function(username, password, name, lastname){
+				this.data.push({username:username, password:password, name:name, lastname:lastname});
 			},
-			verify:function(username, password){
+			get:function(username, password){
 				for(var index in this.data)
 				{
 					var user = this.data[index];
 					if (user.username == username && user.password == password)
-						return true;
+						return user;
 				}
-				return false;
 			}
 		};
 	});

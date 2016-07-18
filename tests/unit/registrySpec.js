@@ -1,7 +1,18 @@
 describe('registry', function(){
 
 	var registry,
-		httpBackend;
+		httpBackend,
+		params,
+		result;
+
+	beforeEach(function(){
+		params = {
+			name:'name',
+			lastname:'lastname',
+			username:'username',
+			password:'123'
+		}
+	});
 
 	beforeEach(function(){
 		module('comicStore');
@@ -14,54 +25,65 @@ describe('registry', function(){
 		});
 	});
 
-	it('calls http service', function(){
-		httpBackend.when('POST', '/register')
-			.respond(200, '');
-		registry({username:'username', password: '123'}, function(){});
-		httpBackend.flush();
-		httpBackend.expectPOST ('/register', {username:'username', password:'123'});
+	it('result is missing_name when no name', function(){
+		params.name = undefined;
+		callRegistry();
+		expect(result).toBe('missing_name');
+	});
+
+	it('result is missing_name when empty name', function(){
+		params.name = '';
+		callRegistry();
+		expect(result).toBe('missing_name');
+	});
+
+	it('result is missing_lastname when no lastname', function(){
+		params.lastname = undefined;
+		callRegistry();
+		expect(result).toBe('missing_lastname');
+	});
+
+	it('result is missing_lastname when empty lastname', function(){
+		params.lastname = '';
+		callRegistry();
+		expect(result).toBe('missing_lastname');
 	});
 
 	it('result is missing_username when no username', function(){
-		var result = undefined;
-		registry({password:''}, function(_result){
-			result = _result;
-		});
+		params.username = undefined;
+		callRegistry();
 		expect(result).toBe('missing_username');
 	});
 
-	it('result is missing_username when username is empty', function(){
-		var result = '';
-		registry({username:''}, function(_result){
-			result = _result;
-		});
-		expect(result).toBe('missing_username');
-	});
-
-	it('result is missing_username when username is only spaces', function(){
-		var result = '';
-		registry({username:'   '}, function(_result){
-			result = _result;
-		});
+	it('result is missing_username when empty username', function(){
+		params.username = ' ';
+		callRegistry();
 		expect(result).toBe('missing_username');
 	});
 
 	it('result is missing_password when no password', function(){
-		var result = undefined;
-		registry({username:'username'}, function(_result){
-			result = _result;
-		});
+		params.password = undefined;
+		callRegistry();
 		expect(result).toBe('missing_password');
 	});
 
-	it('result is undefined when succeeds', function(){
-		var result = 'not undefined';
+	it('result is missing_password when empty password', function(){
+		params.password = '   ';
+		callRegistry();
+		expect(result).toBe('missing_password');
+	});
+
+	it('result is complete when succeeds', function(){
 		httpBackend.when('POST', '/register')
 			.respond(200, '');
-		registry({username:'username', password: '123'}, function(_result){
+		callRegistry();
+		httpBackend.flush();
+		expect(result).toBe('complete');
+	});
+
+	function callRegistry() {
+		registry(params, function(_result){
 			result = _result;
 		});
-		httpBackend.flush();
-		expect(result).toBeUndefined();
-	});
+	}
 });

@@ -14,9 +14,10 @@
 
 		function performLogin(data)
 		{
-			login(data);
-			if ($cookies.get('username') === undefined)
-				$scope.message = 'login_failed';
+			login(data, function(){
+				if ($cookies.get('username') === undefined)
+					$scope.message = 'login_failed';
+			});
 		}
     }]);
 }());

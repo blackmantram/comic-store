@@ -28,13 +28,14 @@ describe('login controller', function(){
 		}
 		spyOn(loginServiceMock, 'login');
 		callLogin(params);
-		expect(loginServiceMock.login).toHaveBeenCalledWith(params);
+		expect(loginServiceMock.login).toHaveBeenCalledWith(params, jasmine.any(Function));
 	});
 
 	it('sets mesage when login failed', function () {
 		cookiesMock.remove('username');
-		callLogin({username:'badusername'});
-		expect(scope.message).toBe('login_failed');
+		callLogin({username:'badusername'}, function(){
+			expect(scope.message).toBe('login_failed');
+		});
 	});
 
 	it('sets mesage when no data sent', function () {

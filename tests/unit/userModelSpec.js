@@ -20,12 +20,12 @@ describe('user model', function(){
 		expect(users.getAll().length).toEqual(1);
 	});
 
-	it('verifies user exists', function(){
-		users.add('username', '123');
-		expect(users.verify('username', '123')).toBe(true);
+	it('gets existent user', function(){
+		users.add('username', '123', 'name', 'lastname');
+		expect(users.get('username', '123')).toEqual({username:'username', password:'123', name:'name', lastname:'lastname'});
 	});
 
-	it('verifies user does not exist', function(){
-		expect(users.verify('username', '123')).toBe(false);
+	it('returns undefined when user does not exists', function(){
+		expect(users.get('username', '123')).toBeUndefined();
 	});
 });
