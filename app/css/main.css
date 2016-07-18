@@ -19,6 +19,10 @@ h1, h2, h3, h4, h5, h6, a {
   color:#fff;
   text-shadow: 0px 5px 15px #000;
 }
+.content p{
+  padding-left: 20px;
+  padding-right: 20px;
+}
 .content-form {
   margin:0 auto;
   max-width:500px;
@@ -31,30 +35,39 @@ h1, h2, h3, h4, h5, h6, a {
 .content-header h1 {
    text-shadow: 0px 5px 15px #000;
 }
-.content-body {
+.content-box {
   border:2px solid #999;
-  background:#2c3e50;
+  background:white;
   border-radius:10px;
   box-shadow:0px 0px 10px #000;
+  box-sizing:border-box;
+  padding-top:15px;
+  margin-bottom:10px;
+  text-align:center;
+  overflow: hidden;
 }
-.content-body p {
+.body {
+  margin-top:50px;
+  background:#2c3e50;
+}
+.comments {
+  padding: 20px;
+  margin-top:10px;
+  background:white;
+}
+.content-box p {
   color:#fff;
 }
-.content-body h3 {
+.content-box h3 {
   text-align:left;
   margin-left:40px;
   color:#fff;
 }
-.content-body {
-  box-sizing:border-box;
-  padding-top:15px;
-  margin:50px auto;
-  text-align:center;
-  overflow: hidden;
+.content-box {
 }
-.content-body input[type="text"],
-.content-body textarea,
-.content-body input[type="password"] {
+.content-box input[type="text"],
+.content-box textarea,
+.content-box input[type="password"] {
   width: 100%;
   max-width:400px;
   height:30px;
@@ -65,7 +78,7 @@ h1, h2, h3, h4, h5, h6, a {
   outline:none;
   padding-left:10px;
 }
-.content-body input[type="button"] {
+.content-box input[type="button"] {
   height:30px;
   width:100px;
   background:#fff;
@@ -76,7 +89,7 @@ h1, h2, h3, h4, h5, h6, a {
   font-family: 'Ubuntu', sans-serif;
   cursor:pointer;
 }
-.content-body textarea {
+.content-box textarea {
   height: 90px !important;
 }
 .sign-up{
