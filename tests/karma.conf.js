@@ -14,9 +14,14 @@ module.exports = function(config) {
       '../app/bower_components/angular-mocks/angular-mocks.js',
       '../app/bower_components/angular-route/angular-route.js',
       '../app/bower_components/angular-cookies/angular-cookies.js',
-      '../app/js/main.js',
+      './unit/main.js',
       '../app/js/**/*.js',
       './unit/*.js'
+    ],
+
+    exclude: [
+      '../app/js/main.js',
+      '../app/js/config.js',
     ],
 
     // test result reporter

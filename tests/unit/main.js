@@ -1,0 +1,1 @@
+angular.module('comicStore', ['ngCookies', 'ngRoute']);

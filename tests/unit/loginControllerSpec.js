@@ -33,8 +33,14 @@ describe('login controller', function(){
 
 	it('sets mesage when login failed', function () {
 		cookiesMock.remove('username');
-		callLogin({});
+		callLogin({username:'badusername'});
 		expect(scope.message).toBe('login_failed');
+	});
+
+	it('sets mesage when no data sent', function () {
+		cookiesMock.remove('username');
+		callLogin({});
+		expect(scope.message).toBe('no_data');
 	});
 
 	it('doesn_t set message when login succeed', function () {
@@ -45,6 +51,8 @@ describe('login controller', function(){
 	function callLogin(params)
 	{
 		var loginController = controller('loginController', { $scope: scope, login: loginServiceMock.login, $cookies: cookiesMock});
-	  	scope.login(params);
+	  	scope.username = params.username;
+	  	scope.password = params.password;
+	  	scope.login();
 	}
 });

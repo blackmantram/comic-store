@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="MainModule">
+<html ng-app="comicStore">
   <head lang="en">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +7,21 @@
     <meta name="author" content="">
     <title>Hello World</title>
     <link rel="stylesheet" href="css/main.css"/>
+    <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
   </head>
   <body>
     <div class="container">
-      <h1>Hello world!</h1>
       <div ng-view></div>
     </div>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/controllers/MainController.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/models/users.js"></script>
+    <script src="js/services/login.js"></script>
+    <script src="js/controllers/loginController.js"></script>
   </body>
 </html>
