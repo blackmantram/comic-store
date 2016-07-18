@@ -16,7 +16,7 @@ module.exports = function(config) {
       '../app/bower_components/angular-cookies/angular-cookies.js',
       './unit/main.js',
       '../app/js/**/*.js',
-      './unit/*.js'
+      './unit/**/*.js'
     ],
 
     exclude: [
