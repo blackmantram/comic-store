@@ -21,4 +21,49 @@ describe('comics service', function () {
   		httpBackend.expectGET ('/comics');
   		httpBackend.flush();
   	});
+
+  	it('creates comic', function(){
+  		var response;
+  		httpBackend.when('POST', '/comics').respond({});
+  		comics.create({title:'title', details:'details'});
+  		httpBackend.expectPOST ('/comics', {title:'title', details:'details'});
+  		httpBackend.flush();
+  	});
+
+  	it('creates comic response is not undefined', function(){
+  		var response;
+  		httpBackend.when('POST', '/comics').respond({});
+  		comics.create({title:'title', details:'details'}, function(result){
+  			response = result;
+  		});
+  		httpBackend.flush();
+  		expect(response).not.toBeUndefined();
+  	});
+
+  	it('result missing_title if no title', function(){
+  		var response;
+  		comics.create({details:'details'}, function(result){
+  			response = result;
+  		});
+  		expect(response).toBe('missing_title');
+  	});
+
+  	it('result missing_detail if no detail', function(){
+  		var response;
+  		comics.create({title:'title'}, function(result){
+  			response = result;
+  		});
+  		expect(response).toBe('missing_detail');
+  	});
+
+  	it('can get one comic', function(){
+  		comics.getOne();
+  	});
+
+  	it('gets one comic', function(){
+  		httpBackend.when('GET', '/comic?id=1').respond({});
+  		comics.getOne(1);
+  		httpBackend.expectGET ('/comic?id=1');
+  		httpBackend.flush();
+  	});
 });

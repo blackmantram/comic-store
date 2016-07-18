@@ -5,6 +5,24 @@
 				$http.get('/comics').then(function(response){
 					callBack(response.data);
 				});
+			},
+			getOne:function(id){
+				$http.get('/comic?id='+1);
+			},
+			create:function(comic, callBack){
+				if (comic.title == undefined)
+				{
+					if (callBack)callBack('missing_title');
+					return;
+				}
+				if (comic.details == undefined)
+				{
+					if (callBack)callBack('missing_detail');
+					return;
+				}
+				$http.post('/comics', comic).then(function(response){
+					if (callBack)callBack(response);
+				});
 			}
 		};
 	}]);
