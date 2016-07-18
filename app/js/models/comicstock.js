@@ -15,6 +15,12 @@
 			},
 			getAll: function(){
 				return this.data;
+			},
+			comment:function(id, comment){
+				var comic = this.get(id);
+				if (!comic.comments)
+					comic.comments = [];
+				comic.comments.push(comment);
 			}
 		};
 	});

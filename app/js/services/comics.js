@@ -25,6 +25,9 @@
 				$http.post('/comics', comic).then(function(response){
 					if (callBack)callBack(response);
 				});
+			},
+			comment:function(comment){
+				$http.post('/comment?id='+comment.id, comment.comment);
 			}
 		};
 	}]);

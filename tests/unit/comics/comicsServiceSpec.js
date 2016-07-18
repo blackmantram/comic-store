@@ -66,4 +66,11 @@ describe('comics service', function () {
   		httpBackend.flush();
       expect(comic).toEqual({});
   	});
+    it('add comments to comic', function(){
+      var comic;
+      httpBackend.when('POST', '/comment?id=1').respond({});
+      comics.comment({id:1, comment:'comment'});
+      httpBackend.expectPOST ('/comment?id=1', 'comment');
+      httpBackend.flush();
+    });
 });

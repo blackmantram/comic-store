@@ -43,6 +43,15 @@
 			return [200, $comicstock.getAll(), {}]
 		});
 
+		$httpBackend.whenPOST(new RegExp('\\/comment\\?id=[0-9]+')).respond(function(method, url, data, headers){
+			var queryMatch = /^[^#]*\?([^#]*)/.exec(url);
+  			var query = queryMatch ? queryMatch[1] : "";
+  			var id = query.split('=')[1];
+			console.log(id, data);
+			$comicstock.comment(id, data);
+			return [200, {}, {}]
+		});
+
 		$httpBackend.whenGET( '' ).passThrough(); 
 	}])
 	.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider){

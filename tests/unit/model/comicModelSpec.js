@@ -23,4 +23,11 @@ describe('comic model', function(){
 		var comic = comicstock.getAll();
 		expect(comic).toEqual([{id:1, title:'title', detail:'detail'},{id:2, title:'title', detail:'detail'}]);
 	});
+
+	it('can add comments to comics', function(){
+		comicstock.add(1, 'title', 'detail');
+		comicstock.comment(1, 'a comment');
+		var comic = comicstock.get(1);
+		expect(comic.comments).toEqual(['a comment']);
+	});
 });

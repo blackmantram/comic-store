@@ -53,7 +53,16 @@ h1, h2, h3, h4, h5, h6, a {
 .comments {
   padding: 20px;
   margin-top:10px;
-  background:white;
+  background:#FFEC9E;
+}
+.comments-area
+{
+  padding-top: 30px;
+}
+.comment {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-top:1px solid #999;
 }
 .content-box p {
   color:#fff;

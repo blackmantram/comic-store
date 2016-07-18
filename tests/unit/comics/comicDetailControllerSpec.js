@@ -18,7 +18,7 @@ describe('comic detail controller', function () {
     
     beforeEach(function(){
       comicsServiceMock.getOne = function(id, callBack){
-        callBack({title:'title', detail:'detail'});
+        callBack({title:'title', detail:'detail', comments:['pre comment']});
       };
     });
 
@@ -40,6 +40,42 @@ describe('comic detail controller', function () {
     it('sets detail', function(){
       controller('comicDetailController', {$scope:scope, $routeParams:routeParamsMock, comics:comicsServiceMock});
       expect(scope.detail).toBe('detail');
+    });
+
+    it('sets comments', function(){
+      controller('comicDetailController', {$scope:scope, $routeParams:routeParamsMock, comics:comicsServiceMock});
+      expect(scope.comments).toEqual(['pre comment']);
+    });
+
+    it('adds comments', function(){
+      controller('comicDetailController', {$scope:scope, $routeParams:routeParamsMock, comics:comicsServiceMock});
+      scope.comments = undefined;
+      scope.text = 'a comment';
+      scope.comment();
+      expect(scope.comments).toEqual(['a comment']);
+    });
+
+    it('does not add empty comments', function(){
+      controller('comicDetailController', {$scope:scope, $routeParams:routeParamsMock, comics:comicsServiceMock});
+      scope.comments = [];
+      scope.text = '    ';
+      scope.comment();
+      expect(scope.comments).toEqual([]);
+    });
+
+    it('cleans text after comment', function(){
+      controller('comicDetailController', {$scope:scope, $routeParams:routeParamsMock, comics:comicsServiceMock});
+      scope.text = 'a comment';
+      scope.comment();
+      expect(scope.text).toBe(undefined);
+    });
+
+    it('calls comment service', function(){
+      spyOn(comicsServiceMock, 'comment');
+      controller('comicDetailController', {$scope:scope, $routeParams:routeParamsMock, comics:comicsServiceMock});
+      scope.text = 'a comment';
+      scope.comment();
+      expect(comicsServiceMock.comment).toHaveBeenCalledWith({id:1, comment:'a comment'});
     });
   		
 });

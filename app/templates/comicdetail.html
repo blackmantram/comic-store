@@ -8,6 +8,11 @@
   	</div>
   	<a href="#!/comics"><h4><< Back</h4></a>
   	<div class="content-box comments">
-  		
+      <textarea ng-model="text"></textarea>
+      <br>
+      <input type="button" value="comment" class="content-button" ng-click="comment()"/>
+      <div class="comments-area">
+        <div class="comment" ng-repeat="comm in comments">{{comm}}</div>
+      </div>
   	</div>
 </div>
