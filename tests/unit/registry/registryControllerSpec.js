@@ -2,7 +2,7 @@ describe('registry controller', function(){
 	var controller;
 	var registryServiceMock = {
 		register: function(params, callback){
-			callback('');
+			callback('complete');
 		}
 	};
 	var scope = {};
@@ -22,10 +22,6 @@ describe('registry controller', function(){
 	});
 
 	it('calls registry service', function () {
-		scope.username = 'username';
-		scope.password = 'password';
-		scope.name = 'name';
-		scope.lastname = 'lastname';
 		var params = {
 			username: 'username',
 			password: 'password',
@@ -33,14 +29,39 @@ describe('registry controller', function(){
 			lastname: 'lastname'
 		}
 		spyOn(registryServiceMock, 'register');
-		controller('registryController', { $scope: scope, registry: registryServiceMock.register});
-		scope.register(params);
+		callRegister();
 		expect(registryServiceMock.register).toHaveBeenCalledWith(params, jasmine.any(Function));
 	});
 
 	it('sets message', function () {
-		controller('registryController', { $scope: scope, registry: registryServiceMock.register});
-		scope.register({});
+		callRegister();
 		expect(scope.message).not.toBeUndefined();
 	});
+
+	it('clears data after registry', function () {
+		callRegister();
+		expect(scope.username).toBeUndefined();
+		expect(scope.password).toBeUndefined();
+		expect(scope.name).toBeUndefined();
+		expect(scope.lastname).toBeUndefined();
+	});
+	it('does not clear data when registry fails', function () {
+		registryServiceMock.register = function(params, callback){
+			callback('some_fail_message');
+		}
+		callRegister();
+		expect(scope.username).not.toBeUndefined();
+		expect(scope.password).not.toBeUndefined();
+		expect(scope.name).not.toBeUndefined();
+		expect(scope.lastname).not.toBeUndefined();
+	});
+
+	function callRegister() {
+		scope.username = 'username';
+		scope.password = 'password';
+		scope.name = 'name';
+		scope.lastname = 'lastname';
+		controller('registryController', { $scope: scope, registry: registryServiceMock.register});
+		scope.register({});
+	}
 });

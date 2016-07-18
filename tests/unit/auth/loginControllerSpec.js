@@ -54,7 +54,7 @@ describe('login controller', function(){
 		expect(scope.message).toBe('');
 	});
 
-	it('redirects whtn login successful', function () {
+	it('redirects when login successful', function () {
 		spyOn(location, 'path');
 		callLogin({username:'username'});
 		expect(location.path).toHaveBeenCalledWith('/comics');

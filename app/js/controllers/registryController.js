@@ -11,7 +11,16 @@
 			}
 			registry(params, function(result){
 				$scope.message = result;
+				if (result == 'complete')
+					clearScope();
 			});
+		}
+
+		function clearScope() {
+			$scope.username = undefined;
+			$scope.password = undefined;
+			$scope.name = undefined;
+			$scope.lastname = undefined;
 		}
     }]);
 }());
