@@ -2,7 +2,7 @@
 <div class="content">
   <div class="content-box body">
   	<input class="filter" type="text" placeholder="buscar" ng-model="filterText">
-  	<input class="new-button" type="button" value="New" class="content-button" ng-click="create()"/>
+  	<input class="new-button" type="button" value="Nuevo" class="content-button" ng-click="create()"/>
   	<ul class="rig columns-4">
   		<a ng-repeat="comic in comicstock | filter:{title:filterText}" ng-href="#!/comicdetail/{{comic.id}}">
 		    <li>

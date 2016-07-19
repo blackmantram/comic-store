@@ -1,5 +1,9 @@
 # comic-store
-prueba técnica para pragma desarrollada en angularjs.
+prueba técnica para Pragma desarrollada en angularjs.
+
+usuario dummy: admin
+password: admin
+
 ## Estructura
 
 ```sh
